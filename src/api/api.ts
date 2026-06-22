@@ -1,11 +1,11 @@
 export interface CryptoCoin {
-	id: String;
-	name: String;
-	symbol: String;
-	image: String;
-	price: Number;
-	marketCap: Number;
-	totalVolume: Number;
+	id: string;
+	name: string;
+	symbol: string;
+	image: string;
+	price: number;
+	marketCap: number;
+	totalVolume: number;
 }
 
 const BASE_URL = "https://api.coingecko.com/api/v3"
@@ -38,7 +38,7 @@ export async function getCoins(): Promise<CryptoCoin[]> {
 	});
 }
 
-export async function getCoinsByIds(coinsIds: string[]) {
+export async function getCoinsByIds(coinsIds: string[]): Promise<CryptoCoin[]> {
 	if (coinsIds.length === 0) return [];
 
 	const url = BASE_URL + `/coins/markets?` + new URLSearchParams({

@@ -1,3 +1,3 @@
 import { atom } from "nanostores";
 
-export const selectedCoins = atom([]);
+export const selectedCoins = atom<string[]>([]);
