@@ -1,10 +1,10 @@
 <script setup lang="ts">
 	import { ref } from 'vue'
 	import { useVModel } from "@nanostores/vue";
-	import { selectedCoinsStore } from "../stores/coinStore.ts"
+	import { selectedCoins } from "../stores/coinStore.ts"
 	const { coins } = defineProps(["coins"])
 
-	const selectedCoins = useVModel(selectedCoinsStore);
+	const selectedCoinsVModel = useVModel(selectedCoins);
 </script>
 
 <template>
@@ -12,7 +12,7 @@
 	<ul>
 		<li v-for="coin in coins">
 		<label>
-			<input type="checkbox" :value="coin.id" v-model="selectedCoins"/>
+			<input type="checkbox" :value="coin.id" v-model="selectedCoinsVModel"/>
 			{{coin.symbol}}: {{coin.name}}
 		</label>
 		</li>

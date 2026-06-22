@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { getCoins } from "../api/api.ts";
 import CryptoSelect from "../components/CryptoSelect.vue";
-//import CryptoData from "../components/CryptoData";
+import CryptoData from "../components/CryptoData.svelte";
 
 const coins = await getCoins();
 ---
 
 <Layout>
 	<CryptoSelect coins={coins} client:load />
-	<!--<CryptoData client:visible />-->
+	<CryptoData client:visible />
 </Layout>

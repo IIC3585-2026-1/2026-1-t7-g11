@@ -3,12 +3,9 @@ export interface CryptoCoin {
 	name: String;
 	symbol: String;
 	image: String;
-}
-
-export interface CoinHistory {
-	prices: Number[];
-	marketCaps: Number[];
-	totalVolumes: Number[];
+	price: Number;
+	marketCap: Number;
+	totalVolume: Number;
 }
 
 const BASE_URL = "https://api.coingecko.com/api/v3"
@@ -24,7 +21,6 @@ export async function getCoins(): Promise<CryptoCoin[]> {
 
 	const r = await fetch(url);
 	if (!r.ok) {
-		console.log(r)
 		throw new Error("Error fetching coins");
 	}
 	
@@ -35,22 +31,26 @@ export async function getCoins(): Promise<CryptoCoin[]> {
 			name: d["name"],
 			symbol: d["symbol"],
 			image: d["image"],
+			price: d["current_price"],
+			marketCap: d["market_cap"],
+			totalVolume: d["total_volume"],
 		}
 	});
 }
 
-export async function getHistoricalData(coins: string[]): Promise<CoinHistory[]> {
-	const url = BASE_URL + "/coins/markets?" + new URLSearchParams({
+export async function getCoinsByIds(coinsIds: string[]) {
+	if (coinsIds.length === 0) return [];
+
+	const url = BASE_URL + `/coins/markets?` + new URLSearchParams({
 		vs_currency: "usd",
-		ids: coins.join(","),
+		ids: coinsIds.join(","),
 	})
 
 	const r = await fetch(url);
 	if (!r.ok) {
-		console.log(r)
 		throw new Error("Error fetching coin historical data");
 	}
-	
+
 	const data = await r.json();
 	return data.map((d: any) => {
 		return {
@@ -58,6 +58,8 @@ export async function getHistoricalData(coins: string[]): Promise<CoinHistory[]>
 			name: d["name"],
 			symbol: d["symbol"],
 			image: d["image"],
-		}
-	});
+			price: d["current_price"],
+			marketCap: d["market_cap"],
+			totalVolume: d["total_volume"],
+		}});
 }
