@@ -1,14 +1,14 @@
-type CryptoCoin = {
-	id: string;
-	name: string;
-	symbol: string;
-	image: string;
+export interface CryptoCoin {
+	id: String;
+	name: String;
+	symbol: String;
+	image: String;
 }
 
-type CoinHistory = {
-	prices: number[];
-	market_caps: number[];
-	total_volumes: number[];
+export interface CoinHistory {
+	prices: Number[];
+	market_caps: Number[];
+	total_volumes: Number[];
 }
 
 const BASE_URL = "https://api.coingecko.com/api/v3"

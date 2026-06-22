@@ -5,10 +5,9 @@ import CryptoSelect from "../components/CryptoSelect.vue";
 //import CryptoData from "../components/CryptoData";
 
 const coins = await getCoins();
-console.log(coins)
 ---
 
 <Layout>
-	<CryptoSelect coins={coins} />
-	<!--<CryptoData />-->
+	<CryptoSelect coins={coins} client:load />
+	<!--<CryptoData client:visible />-->
 </Layout>
