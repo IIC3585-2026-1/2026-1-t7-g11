@@ -7,8 +7,8 @@ export interface CryptoCoin {
 
 export interface CoinHistory {
 	prices: Number[];
-	market_caps: Number[];
-	total_volumes: Number[];
+	marketCaps: Number[];
+	totalVolumes: Number[];
 }
 
 const BASE_URL = "https://api.coingecko.com/api/v3"
